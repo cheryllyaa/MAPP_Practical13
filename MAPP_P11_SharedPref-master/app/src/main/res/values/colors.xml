@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="mint_background">#DAFFE7</color>
+    <color name="purple_background">#E7DAFF</color>
+    <color name="pink_background">#FFDAE0</color>
+    <color name="default_background">#999999</color>
+</resources>
