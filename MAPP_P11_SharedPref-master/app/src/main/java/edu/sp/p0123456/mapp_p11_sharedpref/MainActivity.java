@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         // restore preferences
         mCount = mPreferences.getInt(COUNT_KEY, 0);
-        mShowCountTextView.setText(String.format("%s", mCount));
+        mShowCountTextView.setText(String.format("Cheryl + %s", mCount));
         mColor = mPreferences.getInt(COLOR_KEY, mColor);
         mShowCountTextView.setBackgroundColor(mColor);
     }
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void countUp(View view) {
         mCount++;
-        mShowCountTextView.setText(String.format("%s", mCount));
+        mShowCountTextView.setText(String.format("Cheryl + %s", mCount));
     }
 
     /**
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     public void reset(View view) {
         // Reset count
         mCount = 0;
-        mShowCountTextView.setText(String.format("%s", mCount));
+        mShowCountTextView.setText(String.format("Cheryl + %s", mCount));
 
         // Reset color
         mColor = ContextCompat.getColor(this, R.color.default_background);
