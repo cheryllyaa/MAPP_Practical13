@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         // restore preferences
         mCount = mPreferences.getInt(COUNT_KEY, 0);
-        mShowCountTextView.setText(String.format("Chery + %s", mCount));
+        mShowCountTextView.setText(String.format("Cheryl + %s", mCount));
         mColor = mPreferences.getInt(COLOR_KEY, mColor);
         mShowCountTextView.setBackgroundColor(mColor);
     }
