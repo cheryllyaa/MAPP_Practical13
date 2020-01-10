@@ -3,7 +3,6 @@ package edu.sp.p0123456.mapp_p11_sharedpref;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -21,25 +20,27 @@ public class MainActivity extends AppCompatActivity {
     private int mColor;
     // Text view to display both count and color.
     private TextView mShowCountTextView;
-    // add name of shared ref file and shared ref obj
-    private SharedPreferences mPreferences;
-    private String sharedPrefFile = "edu.sp.mapp.hellosharedpref";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize views, color, preferences
+        // Initialize views, color
         mShowCountTextView = (TextView) findViewById(R.id.count_textview);
         mColor = ContextCompat.getColor(this, R.color.default_background);
-        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
-        // restore preferences
-        mCount = mPreferences.getInt(COUNT_KEY, 0);
-        mShowCountTextView.setText(String.format("Chery + %s", mCount));
-        mColor = mPreferences.getInt(COLOR_KEY, mColor);
-        mShowCountTextView.setBackgroundColor(mColor);
+        // Restore the saved state. See onSaveInstanceState() for what gets saved.
+        if (savedInstanceState != null) {
+
+            mCount = savedInstanceState.getInt(COUNT_KEY);
+            if (mCount != 0) {
+                mShowCountTextView.setText(String.format("%s", mCount));
+            }
+
+            mColor = savedInstanceState.getInt(COLOR_KEY);
+            mShowCountTextView.setBackgroundColor(mColor);
+        }
     }
 
     /**
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void countUp(View view) {
         mCount++;
-        mShowCountTextView.setText(String.format("Cheryl + %s", mCount));
+        mShowCountTextView.setText(String.format("%s", mCount));
     }
 
     /**
@@ -89,27 +90,10 @@ public class MainActivity extends AppCompatActivity {
     public void reset(View view) {
         // Reset count
         mCount = 0;
-        mShowCountTextView.setText(String.format("Cheryl + %s", mCount));
+        mShowCountTextView.setText(String.format("%s", mCount));
 
         // Reset color
         mColor = ContextCompat.getColor(this, R.color.default_background);
         mShowCountTextView.setBackgroundColor(mColor);
-
-        //get editor
-        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-        //delete shared preferences
-        preferencesEditor.clear();
-        //apply changes
-        preferencesEditor.apply();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-        preferencesEditor.putInt(COUNT_KEY, mCount);
-        preferencesEditor.putInt(COLOR_KEY, mColor);
-        preferencesEditor.apply();
     }
 }
